@@ -1,5 +1,8 @@
 # The Nightly Table — Restaurant Reservation Management System
 
+Vercel : https://restaurant-reservation-system-six-self.vercel.app
+Render : https://restaurant-reservation-system-avk6.onrender.com
+
 A full-stack reservation system for a single restaurant: customers sign up and book tables
 themselves; a restaurant admin oversees every reservation and the table inventory. Built with
 React (Vite + Tailwind), Node.js/Express, MongoDB, and JWT authentication.
