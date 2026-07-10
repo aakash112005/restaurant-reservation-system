@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #12151C;
+  color: #EDEAE3;
+  font-family: 'Inter', sans-serif;
+}
+
+::selection {
+  background-color: #C9A227;
+  color: #12151C;
+}
+
+*:focus-visible {
+  outline: 2px solid #C9A227;
+  outline-offset: 2px;
+}
+
+/* Signature element: a perforated reservation ticket stub, used in the
+   hero and confirmation moments. The notches are drawn with radial
+   gradients so no extra markup or SVG masking is needed. */
+.ticket-stub {
+  position: relative;
+  background: #1B2029;
+  border: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.ticket-stub::before,
+.ticket-stub::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #12151C;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket-stub::before {
+  left: -11px;
+}
+
+.ticket-stub::after {
+  right: -11px;
+}
+
+.ticket-perforation {
+  border-left: 2px dashed rgba(201, 162, 39, 0.35);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
