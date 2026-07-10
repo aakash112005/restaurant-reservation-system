@@ -61,11 +61,56 @@ const CustomerDashboard = () => {
     setSuccess('');
   };
 
+
+  const validateBooking = () => {
+  const now = new Date();
+
+  const selectedDate = new Date(form.date);
+  selectedDate.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Past date
+  if (selectedDate < today) {
+    return "You cannot book a table for a past date.";
+  }
+
+  // Check today's slot
+  if (selectedDate.getTime() === today.getTime()) {
+    if (!form.timeSlot) {
+      return "Please select a time slot.";
+    }
+
+    const [, endTime] = form.timeSlot.split("-");
+    const [hour, minute] = endTime.split(":").map(Number);
+
+    const slotEnd = new Date();
+    slotEnd.setHours(hour, minute, 0, 0);
+
+    if (now > slotEnd) {
+      return "This time slot has already ended.";
+    }
+  }
+
+  return null;
+};
+
+
   const handleCheckAvailability = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
-    setCheckingAvailability(true);
+   e.preventDefault();
+
+  setError('');
+  setSuccess('');
+
+  const validationError = validateBooking();
+
+  if (validationError) {
+    setError(validationError);
+    return;
+  }
+
+  setCheckingAvailability(true);
     try {
       const { data } = await client.get('/tables/availability', {
         params: { date: form.date, timeSlot: form.timeSlot, guests: form.numberOfGuests },
@@ -133,16 +178,15 @@ const CustomerDashboard = () => {
             {success && <Alert type="success">{success}</Alert>}
 
             <div className="grid gap-5 sm:grid-cols-3">
-              <Field label="Date">
-                <Input
-                  type="date"
-                  name="date"
-                  min={todayString()}
-                  value={form.date}
-                  onChange={handleFormChange}
-                  required
-                />
-              </Field>
+             <Field label="Date">
+  <Input
+    type="date"
+    name="date"
+    value={form.date}
+    onChange={handleFormChange}
+    required
+  />
+</Field>
               <Field label="Time slot">
                 <Select name="timeSlot" value={form.timeSlot} onChange={handleFormChange} required>
                   <option value="" disabled>Select a slot</option>

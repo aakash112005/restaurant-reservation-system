@@ -15,7 +15,7 @@ const Landing = () => (
   <Layout>
     {/* Hero */}
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-grain" />
+      <div className="absolute inset-0 -z-10 bg-grain" />
       <div className="mx-auto grid max-w-6xl gap-14 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-brass">
